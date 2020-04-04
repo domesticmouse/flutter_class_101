@@ -26,7 +26,8 @@ you can store your changes between gitpod sessions in your github fork.
 
 Currently you cannot use the `flutter run -d web` workflow from gitpod, as 
 `flutter run` will create a new random high port, bound to localhost, which gitpod
-will refuse to expose [flutter/flutter #53978](https://github.com/flutter/flutter/issues/53978). 
+will refuse to expose. Tracking bug for `flutter run -d web` port configuration: 
+[flutter/flutter #53978](https://github.com/flutter/flutter/issues/53978). 
 
 Here is a partial work around:
 
