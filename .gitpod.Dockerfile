@@ -13,6 +13,7 @@ RUN sudo apt-get update && \
     sudo apt-get install -y dart && \
     git clone https://github.com/flutter/flutter.git -b beta && \
     ./flutter/bin/flutter doctor && \
+    ./flutter/bin/flutter config --enable-web && \
     echo "export PATH=\"\$PATH:/usr/lib/dart/bin:\$HOME/.pub-cache/bin:$PWD/flutter/bin\"" >> $HOME/.bashrc && \
     /usr/lib/dart/bin/pub global activate grinder && \
     /usr/lib/dart/bin/pub global activate webdev && \
