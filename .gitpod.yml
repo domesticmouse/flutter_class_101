@@ -1,0 +1,10 @@
+tasks:
+  - init: flutter pub get
+
+image:
+  file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - Dart-Code.dart-code@3.9.0:umvoqCQMs3NpksmwhVtStw==
+    - Dart-Code.flutter@3.9.0:rhf4nv+I5pjwQEks5HXkDg==
