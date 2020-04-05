@@ -2,6 +2,9 @@ tasks:
   - init: flutter pub get
     command: flutter run -d web --web-hostname 0.0.0.0 --web-port 8080
 
+# Remove the above command after https://github.com/flutter/flutter/issues/32436 is fixed
+# and use Flutter's debugger to launch the flutter app instead.
+
 ports:
   - port: 8080
     onOpen: open-preview
