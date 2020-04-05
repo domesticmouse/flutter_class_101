@@ -1,1 +1,8 @@
 include: package:pedantic/analysis_options.yaml
+
+# For more on the following, please see:
+# https://dash-overflow.net/articles/getting_started/
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
