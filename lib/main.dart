@@ -55,10 +55,24 @@ class MyContent extends StatefulWidget {
 }
 
 class _MyContentState extends State<MyContent> {
+  int count = 0;
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Hello Flutter 101 =)'),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text('Hello Flutter $count =)'),
+          SizedBox(height: 8),
+          RaisedButton(
+            onPressed: (){
+              count++;
+            },
+            child: Text('Click me'),
+          ),
+        ],
+      ),
     );
   }
 }
