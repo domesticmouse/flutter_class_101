@@ -66,8 +66,10 @@ class _MyContentState extends State<MyContent> {
           Text('Hello Flutter $count =)'),
           SizedBox(height: 8),
           RaisedButton(
-            onPressed: (){
-              count++;
+            onPressed: () async {
+              setState(() {
+                count++;
+              });
             },
             child: Text('Click me'),
           ),
