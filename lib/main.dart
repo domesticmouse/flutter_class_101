@@ -42,9 +42,23 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(
-        child: Text('Hello Flutter 101 =)'),
-      ),
+      body: MyContent(),
+    );
+  }
+}
+
+class MyContent extends StatefulWidget {
+  const MyContent();
+
+  @override
+  _MyContentState createState() => _MyContentState();
+}
+
+class _MyContentState extends State<MyContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Hello Flutter 101 =)'),
     );
   }
 }
