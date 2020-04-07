@@ -13,9 +13,25 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class Counter with ChangeNotifier {
+  int _count = 0;
+  int get count => _count;
+
+  void increment() {
+    _count++;
+    notifyListeners();
+  }
+}
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      child: MyApp(),
+      providers: [ChangeNotifierProvider(create: (_) => Counter())],
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -47,15 +63,8 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class MyContent extends StatefulWidget {
+class MyContent extends StatelessWidget {
   const MyContent();
-
-  @override
-  _MyContentState createState() => _MyContentState();
-}
-
-class _MyContentState extends State<MyContent> {
-  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +72,28 @@ class _MyContentState extends State<MyContent> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text('Hello Flutter $count =)'),
+          CountingText(),
           SizedBox(height: 8),
           RaisedButton(
             onPressed: () async {
-              setState(() {
-                count++;
-              });
+              Provider.of<Counter>(context, listen: false).increment();
             },
             child: Text('Click me'),
           ),
         ],
       ),
     );
+  }
+}
+
+class CountingText extends StatelessWidget {
+  const CountingText({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final counter = Provider.of<Counter>(context);
+    return Text('Hello Flutter ${counter.count} =)');
   }
 }
