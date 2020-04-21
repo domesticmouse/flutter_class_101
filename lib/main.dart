@@ -43,57 +43,48 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: MyHomePage(title: 'Chatterng away...'),
+      home: ChatScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Chatterng away...'),
       ),
-      body: MyContent(),
-    );
-  }
-}
-
-class MyContent extends StatelessWidget {
-  const MyContent();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          CountingText(),
-          SizedBox(height: 8),
-          RaisedButton(
-            onPressed: () async {
-              Provider.of<Counter>(context, listen: false).increment();
-            },
-            child: Text('Click me'),
+      body: Column(
+        children: [
+          _buildTextComposer(),
+          Text(
+            'Hello!',
+            style: TextStyle(fontSize: 30),
           ),
         ],
       ),
     );
   }
-}
 
-class CountingText extends StatelessWidget {
-  const CountingText({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final counter = Provider.of<Counter>(context);
-    return Text('Hello Flutter ${counter.count} =)');
+  Widget _buildTextComposer() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      child: TextField(
+        controller: _textController,
+        decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
+      ),
+    );
   }
 }
