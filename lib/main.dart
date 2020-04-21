@@ -59,6 +59,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
                 decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
+                focusNode: _focusNode,
               ),
             ),
             Container(
@@ -109,8 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _handleSubmitted(String content) {
     _textController.clear();
-    // TODO: fiure out how to give the text field focus.
-    // Add  autofocus: true, to TextField i think
+    _focusNode.requestFocus();
     print('User typed: $content');
   }
 }
