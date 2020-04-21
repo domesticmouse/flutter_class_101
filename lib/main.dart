@@ -83,8 +83,14 @@ class _ChatScreenState extends State<ChatScreen> {
       margin: EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
         controller: _textController,
+        onSubmitted: _handleSubmitted,
         decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
       ),
     );
+  }
+
+  void _handleSubmitted(String content) {
+    _textController.clear();
+    // TODO: fiure out how to give the text field focus.
   }
 }
