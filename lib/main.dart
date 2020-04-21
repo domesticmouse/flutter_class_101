@@ -81,10 +81,23 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildTextComposer() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
-      child: TextField(
-        controller: _textController,
-        onSubmitted: _handleSubmitted,
-        decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextField(
+              controller: _textController,
+              onSubmitted: _handleSubmitted,
+              decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 4),
+            child: IconButton(
+              icon: Icon(Icons.send),
+              onPressed: () => _handleSubmitted(_textController.text),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -92,5 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void _handleSubmitted(String content) {
     _textController.clear();
     // TODO: fiure out how to give the text field focus.
+    // Add  autofocus: true, to TextField i think
+    print('User typed: $content');
   }
 }
