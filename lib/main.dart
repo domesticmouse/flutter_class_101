@@ -15,12 +15,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Counter with ChangeNotifier {
-  int _count = 0;
-  int get count => _count;
+class Chatlog with ChangeNotifier {
+  final _messages = <String>[];
+  List<String> get messages => <String>[..._messages];
 
-  void increment() {
-    _count++;
+  void chatline(String message) {
+    _messages.add(message);
     notifyListeners();
   }
 }
@@ -29,7 +29,7 @@ void main() {
   runApp(
     MultiProvider(
       child: MyApp(),
-      providers: [ChangeNotifierProvider(create: (_) => Counter())],
+      providers: [ChangeNotifierProvider(create: (_) => Chatlog())],
     ),
   );
 }
