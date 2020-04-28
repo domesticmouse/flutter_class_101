@@ -16,11 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Chatlog with ChangeNotifier {
-  final _messages = <String>[];
-  List<String> get messages => <String>[..._messages];
+  final _chats = <String>['Some random content', 'goes here'];
+  List<String> get chats => <String>[..._chats];
 
-  void chatline(String message) {
-    _messages.add(message);
+  void addChat(String chat) {
+    _chats.add(chat);
     notifyListeners();
   }
 }
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chattr (Alpha!)',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.pink,
       ),
       home: ChatScreen(),
     );
