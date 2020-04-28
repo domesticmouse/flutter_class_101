@@ -67,14 +67,23 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text('Chatterng away...'),
       ),
-      body: Column(
-        children: [
-          _buildTextComposer(),
-          Text(
-            'Hello!',
-            style: TextStyle(fontSize: 30),
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Consumer<Chatlog>(
+              builder: (context, value, child) => Flexible(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(8),
+                  itemBuilder: (context, index) =>
+                      ChatMessage(value.chats[index]),
+                  itemCount: value.chats.length,
+                ),
+              ),
+            ),
+            Divider(height: 1),
+            _buildTextComposer(),
+          ],
+        ),
       ),
     );
   }
@@ -113,5 +122,36 @@ class _ChatScreenState extends State<ChatScreen> {
     _textController.clear();
     _focusNode.requestFocus();
     print('User typed: $content');
+  }
+}
+
+const String _name = 'Bob';
+
+class ChatMessage extends StatelessWidget {
+  const ChatMessage(this._text);
+  final String _text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(child: Text(_name[0])),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(_name, style: Theme.of(context).textTheme.headline4),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(_text),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
