@@ -63,6 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final chatlog = Provider.of<Chatlog>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Chatterng away...'),
@@ -70,14 +71,12 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Consumer<Chatlog>(
-              builder: (context, value, child) => Flexible(
-                child: ListView.builder(
-                  padding: EdgeInsets.all(8),
-                  itemBuilder: (context, index) =>
-                      ChatMessage(value.chats[index]),
-                  itemCount: value.chats.length,
-                ),
+            Flexible(
+              child: ListView.builder(
+                padding: EdgeInsets.all(8),
+                itemBuilder: (context, index) =>
+                    ChatMessage(chatlog.chats[index]),
+                itemCount: chatlog.chats.length,
               ),
             ),
             Divider(height: 1),
@@ -100,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Flexible(
               child: TextField(
                 controller: _textController,
-                onSubmitted: _handleSubmitted,
+                onSubmitted: (content) => _handleSubmitted(context, content),
                 decoration: InputDecoration.collapsed(hintText: 'Say hello!'),
                 focusNode: _focusNode,
               ),
@@ -109,7 +108,8 @@ class _ChatScreenState extends State<ChatScreen> {
               margin: EdgeInsets.symmetric(horizontal: 4),
               child: IconButton(
                 icon: Icon(Icons.send),
-                onPressed: () => _handleSubmitted(_textController.text),
+                onPressed: () =>
+                    _handleSubmitted(context, _textController.text),
               ),
             )
           ],
@@ -118,10 +118,10 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void _handleSubmitted(String content) {
+  void _handleSubmitted(BuildContext context, String content) {
     _textController.clear();
     _focusNode.requestFocus();
-    print('User typed: $content');
+    Provider.of<Chatlog>(context, listen: false).addChat(content);
   }
 }
 
