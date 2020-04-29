@@ -12,7 +12,7 @@ RUN sudo apt-get update && \
     sudo apt-get update && \
     sudo apt-get install -y dart && \
     echo "export PATH=\"\$PATH:/usr/lib/dart/bin:\$HOME/.pub-cache/bin\"" >> $HOME/.bashrc && \
-    git clone https://github.com/flutter/flutter.git -b dev && \
+    git clone https://github.com/flutter/flutter.git -b beta && \
     ./flutter/bin/flutter upgrade && \
     ./flutter/bin/flutter doctor -v && \
     ./flutter/bin/flutter config --enable-web && \
