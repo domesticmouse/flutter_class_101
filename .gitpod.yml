@@ -1,5 +1,6 @@
 tasks:
-  - init: flutter pub get
+  - before: flutter upgrade
+    init: flutter pub upgrade
     command: flutter run -d web --web-hostname 0.0.0.0 --web-port 8080
 
 # Remove the above command after https://github.com/flutter/flutter/issues/32436 is fixed
