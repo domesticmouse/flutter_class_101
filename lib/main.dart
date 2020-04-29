@@ -121,7 +121,9 @@ class _ChatScreenState extends State<ChatScreen> {
   void _handleSubmitted(BuildContext context, String content) {
     _textController.clear();
     _focusNode.requestFocus();
-    Provider.of<Chatlog>(context, listen: false).addChat(content);
+    if (content.length > 0) {
+      Provider.of<Chatlog>(context, listen: false).addChat(content);
+    }
   }
 }
 
